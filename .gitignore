@@ -1,0 +1,4 @@
+.DS_Store
+node_modules/
+# Editor types Claude Code writes when it loads a plugin from disk
+plugins/*/.claude-plugin/types/

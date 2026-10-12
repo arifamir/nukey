@@ -1,0 +1,19 @@
+{
+  "name": "nukey",
+  "version": "1.0.0",
+  "description": "Nukey, a little microwave with a face in its window, sits above the prompt and acts out what Claude is doing, goes DING! when a turn is done, and shows a control-panel meter for context and rate limits, in five colour themes.",
+  "author": {
+    "name": "Arif Amir",
+    "url": "https://github.com/arifamir"
+  },
+  "repository": "https://github.com/arifamir/nukey",
+  "license": "MIT",
+  "keywords": [
+    "mod",
+    "pet",
+    "companion",
+    "status",
+    "microwave"
+  ],
+  "types": "./types/index.d.ts"
+}
