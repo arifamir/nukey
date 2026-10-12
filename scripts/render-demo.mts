@@ -1,18 +1,18 @@
-// Writes the README images into assets/:
+// Writes nukey's README images into plugins/nukey/assets/:
 //   demo-scenes.svg         a dark band cycling through a few scenes with their label and detail
 //   demo-meter.svg          the meter filling up
 //   demo-meter-details.svg  the same, with the readings table beside it
 //   demo-themes.svg         Nukey in each theme, with its name
-// Run from the plugin folder: npx -y tsx scripts/render-demo.mts
+// Run from the repository root: npx -y tsx@4.23.15 scripts/render-demo.mts
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import type { Gauges, SceneId } from '../types/index.d.ts'
-import { drawNukey, drawPanel, drawProp, panelReadings, panelWidth } from '../hooks/art/index.ts'
-import { THEMES, THEME_NAMES } from '../hooks/themes.ts'
+import type { Gauges, SceneId } from '../plugins/nukey/types/index.d.ts'
+import { drawNukey, drawPanel, drawProp, panelReadings, panelWidth } from '../plugins/nukey/hooks/art/index.ts'
+import { THEMES, THEME_NAMES } from '../plugins/nukey/hooks/themes.ts'
 
-const assets = join(dirname(fileURLToPath(import.meta.url)), '..', 'assets')
+const assets = join(dirname(fileURLToPath(import.meta.url)), '..', 'plugins', 'nukey', 'assets')
 mkdirSync(assets, { recursive: true })
 
 const FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
@@ -149,5 +149,5 @@ const outputs: [string, string][] = [
 
 for (const [name, svg] of outputs) {
   writeFileSync(join(assets, name), svg + '\n')
-  console.log(`wrote assets/${name} (${svg.length} bytes)`)
+  console.log(`wrote plugins/nukey/assets/${name} (${svg.length} bytes)`)
 }

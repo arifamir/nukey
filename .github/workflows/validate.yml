@@ -18,6 +18,6 @@ jobs:
       - name: Validate the marketplace
         run: claude plugin validate . --strict
       - name: Validate nukey
-        run: claude plugin validate plugins/nukey
+        run: claude plugin validate plugins/nukey --strict
       - name: Test nukey
         run: claude plugin test plugins/nukey

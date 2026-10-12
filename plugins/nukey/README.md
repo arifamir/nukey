@@ -91,14 +91,19 @@ The last two units of a gauge turn red once it passes 85%. On accounts without r
 
 The theme colours Nukey, its helpers and the meter, and Nukey remembers your pick across sessions.
 
+## Privacy
+
+Nukey makes no network requests and sends nothing anywhere. It reads what Claude Code already tells plugins on your machine: the tools Claude calls and their arguments, the context window's size and your rate-limit usage. It uses these only to pick a scene and fill the meter. The only thing it saves is your chosen theme, kept in Claude Code's own plugin storage on your machine. Everything else lasts only for the session.
+
 ## Development
 
 ```bash
 claude --plugin-dir ./plugins/nukey                   # run Claude Code with Nukey loaded from disk
 claude plugin test plugins/nukey                      # run the tests
 claude plugin validate plugins/nukey                  # check the manifest and hooks
-npx -y tsx plugins/nukey/scripts/render-demo.mts      # redraw the images in assets/
 ```
+
+The README images are drawn by `scripts/render-demo.mts` at the root of the repository.
 
 How the code is laid out:
 

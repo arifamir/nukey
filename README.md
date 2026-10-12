@@ -19,6 +19,10 @@ Want updates as they ship? Open `/plugin`, go to **Marketplaces**, choose `nukey
 | :- | :- |
 | [`nukey`](plugins/nukey) | A microwave pet above the prompt that acts out what Claude is doing, goes DING! when it's done, and shows a meter for context and rate limits, in five colour themes |
 
+## Development
+
+See [CLAUDE.md](CLAUDE.md) for the working rules. To redraw nukey's README images after changing its art, run `npx -y tsx@4.23.15 scripts/render-demo.mts` from the repository root.
+
 ## License
 
 [MIT](LICENSE). An unofficial community project, not affiliated with or endorsed by Anthropic.
