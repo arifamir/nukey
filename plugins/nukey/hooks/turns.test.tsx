@@ -249,25 +249,6 @@ describe('dialogs', () => {
     bash.finish()
     await deploying
   })
-
-  it('a dialog that names its call is matched by id', async ($, on) => {
-    const w = world(on)
-    const { read } = await session($, w)
-    const [first, second] = [pending(), pending()]
-    w.tool = e => (e.tool_use_id === 'b1' ? first.result : second.result)
-    const one = call($, { tool: 'Bash', command: 'ls', tool_use_id: 'b1' })
-    const two = call($, { tool: 'Bash', command: 'rm x', tool_use_id: 'b2' })
-    await w.clock.advance(2400)
-    await $.classic.PermissionRequest({ tool_name: 'Bash', tool_input: {}, tool_use_id: 'b2' } as Parameters<
-      Engine['classic']['PermissionRequest']
-    >[0])
-    first.finish()
-    await one
-    expect(await read()).toMatchObject({ label: 'Waiting for your OK', detail: 'Bash' })
-    second.finish()
-    await two
-    expect(await read()).toMatchObject({ label: 'Running a command', detail: 'rm x' })
-  })
 })
 
 describe('compaction', () => {

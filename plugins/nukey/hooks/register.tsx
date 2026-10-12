@@ -237,13 +237,15 @@ export const register: Register = on => {
     return result
   }).catch(($, e, next) => next(e))
 
+  // Only watches: the decision always passes on to the user untouched.
   on('classic.PermissionRequest', ($, e, next) => {
-    if (e.agent_id === undefined) {
-      const id: unknown = (e as { tool_use_id?: unknown }).tool_use_id
-      void dispatch($, { type: 'dialog', tool: e.tool_name, ...(typeof id === 'string' ? { id } : {}) })
+    try {
+      if (e.agent_id === undefined) void dispatch($, { type: 'dialog', tool: e.tool_name }).catch(() => undefined)
+    } catch {
+      // A slip in Nukey never gets in the way of the dialog.
     }
     return next(e)
-  }).catch(($, e, next) => next(e))
+  })
 
   on('session.compact', async ($, e, next) => {
     if (e.agentId !== undefined || e.trigger === 'precompute') return next(e)

@@ -95,6 +95,24 @@ The theme colours Nukey, its helpers and the meter, and Nukey remembers your pic
 
 Nukey makes no network requests and sends nothing anywhere. It reads what Claude Code already tells plugins on your machine: the tools Claude calls and their arguments, the context window's size and your rate-limit usage. It uses these only to pick a scene and fill the meter. The only thing it saves is your chosen theme, kept in Claude Code's own plugin storage on your machine. Everything else lasts only for the session.
 
+## What Nukey hooks into
+
+Nukey is a mod: it watches Claude Code's events and draws the band. Every hook passes its event on unchanged, so Nukey never blocks, rewrites or answers anything. That includes permission dialogs: the decision always stays with you.
+
+| Event | What Nukey does with it |
+| :- | :- |
+| `session.start` | Registers `/nukey`, restores the scene after a reload, loads your saved theme and reads the first meter values |
+| `command.run` for `nukey` | Answers your `/nukey` command. It handles no other command |
+| `session.measure` | Reads the context and rate-limit percentages for the meter |
+| `turn.start`, `turn.complete`, `classic.Stop` | Knows when a turn starts and ends, and whether background work is still running |
+| `turn.step` | Watches the reply as it streams in, to show thinking, talking and the tool being written. Every chunk is passed on as it arrives |
+| `tool.call` | Notes which tool Claude calls and whether it failed, to pick the scene and the line under it |
+| `classic.PermissionRequest` | Only notices that a permission dialog is open, to show the "Waiting for your OK" scene. It never answers the dialog: it always hands it on to you as it came |
+| `session.compact` | Shows the compacting scene while the conversation is compacted |
+| `classic.SubagentStart`, `agent.spawn` | Counts the helpers Claude sends out |
+| `session.end` | Stops Nukey's timers |
+| `ui.render` for `AbovePrompt` | Draws the band above the prompt |
+
 ## Development
 
 ```bash

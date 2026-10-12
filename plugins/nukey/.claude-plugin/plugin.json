@@ -1,7 +1,7 @@
 {
   "name": "nukey",
   "displayName": "Nukey",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Nukey, a little microwave with a face in its window, sits above the prompt and acts out what Claude is doing, goes DING! when a turn is done, and shows a control-panel meter for context and rate limits, in five colour themes.",
   "author": {
     "name": "Arif Amir",
